@@ -4,10 +4,6 @@
   become: true
   tasks:
 
-  - name: update repository index
-    apt:
-      update_cache: yes
-    when: ansible_distribution == "Debian"
 
   - name: install apps
     apt:
@@ -15,18 +11,14 @@
         - neofetch
         - cmatrix
       state: latest
+      update_cache: yes
     when: ansible_distribution == "Debian"
 
-
-  - name: update repository index
-    dnf:
-      update_cache: yes
-    when: ansible_distribution == "Rocky"
 
   - name: install apps
     dnf:
       name:
         - neofetch 
-        - cmatrix
       state: latest
+      update_cache: yes
     when: ansible_distribution == "Rocky"
