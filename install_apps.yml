@@ -6,19 +6,9 @@
 
 
   - name: install apps
-    apt:
+    package:
       name:
         - neofetch
         - cmatrix
       state: latest
       update_cache: yes
-    when: ansible_distribution == "Debian"
-
-
-  - name: install apps
-    dnf:
-      name:
-        - neofetch 
-      state: latest
-      update_cache: yes
-    when: ansible_distribution == "Rocky"
