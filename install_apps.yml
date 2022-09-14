@@ -9,6 +9,5 @@
     package:
       name:
         - neofetch
-        - cmatrix
       state: latest
-      update_cache: yes
+      
