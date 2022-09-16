@@ -25,6 +25,14 @@
     package:
       name:
         - neofetch
+  - name: copy default html file for site
+    tags: apache,httpd
+    copy:
+      src: default_site.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644
 
 - hosts: Debian_server
   become: true
