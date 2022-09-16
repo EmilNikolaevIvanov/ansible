@@ -1,6 +1,6 @@
-[deb_server]
+[Debian_server]
 emo@192.168.43.206
 
-[Rhel_Server]
+[Rocky_Server]
 emo@192.168.43.165
 

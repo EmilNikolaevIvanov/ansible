@@ -4,10 +4,36 @@
   become: true
   tasks:
 
+  - name: install updats (Rocky)
+    tags: always
+    dnf:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "Rocky"
+
+
+  - name: install updates (Debian)
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Debian"
+
 
   - name: install apps
+    tags: neofetch
     package:
       name:
         - neofetch
+
+- hosts: Debian_server
+  become: true
+  tasks: 
+
+  - name: install apps
+    tags: cmatrix
+    apt:
+      name:
+        - cmatrix
       state: latest
-      
+
