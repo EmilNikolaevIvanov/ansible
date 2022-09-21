@@ -3,6 +3,7 @@
 - hosts: all
   become: true
   tasks:
+  pre_tasks:
 
   - name: update repo cache (Rocky)
     tags: always
@@ -20,57 +21,17 @@
     when: ansible_distribution == "Debian"
 
 
-  - name: install apps
-    tags: neofetch
-    package:
-      name:
-        - neofetch
-
-  - name: copy default html file for site
-    tags: apache,httpd
-    copy:
-      src: default_site.html
-      dest: /var/www/html/index.html
-      owner: root
-      group: root
-      mode: 0644
-
-- hosts: Debian_server
-  become: true
-  tasks: 
-
-  - name: install apps
-    tags: cmatrix
-    apt:
-      name:
-        - cmatrix
-      state: latest
 
 - hosts: all
   become: true
-  tasks:
+  roles:
+    - base
  
 
-  - name: add ssh key for simone
-    tags: always
-    authorized_key:
-      user: simone
-      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIH3+FrcB0cwCgzMIt7B4k3PSz6bGueFoufLARzROy0V ansible"
 
 
 - hosts: workstations
   become: true
-  tasks:
+  roles:
+    - workstations
 
-  - name: install unzip
-    package:
-      name: unzip
-
-  - name: install terraform
-    unarchive:
-      src: https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_amd64.zip
-      dest: /usr/local/bin
-      remote_src: yes
-      mode: 0755
-      owner: root
-      group: root
